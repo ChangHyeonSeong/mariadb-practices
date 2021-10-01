@@ -27,5 +27,5 @@ select lpad(salary, 10, '*') from salaries;
 select concat('---',ltrim('    hello    '),'---'),
        concat('---',rtrim('    hello    '),'---'),
        concat('---',trim(both 'x' from 'xxxhelloxxx'),'---') , 
-        concat('---',trim(LEADING 'x' from 'xxxhelloxxx'),'---'),
+	   concat('---',trim(LEADING 'x' from 'xxxhelloxxx'),'---'),
        concat('---',trim(TRAILING 'x' from 'xxxhelloxxx'),'---');
