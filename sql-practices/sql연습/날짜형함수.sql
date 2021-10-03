@@ -3,8 +3,8 @@
 -- CURDATE(), CURRENT_DATE;
 select CURDATE(), CURRENT_DATE;
 
--- CURDATE(), CURRENT_TIME;
-select CUTRIME(), CURRENT_TIME;
+-- CURTIME(), CURRENT_TIME;
+select CURTIME(), CURRENT_TIME;
 
 -- now() vs sysdate()
 select now(), sysdate();
