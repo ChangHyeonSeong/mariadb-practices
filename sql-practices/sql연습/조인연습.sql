@@ -39,7 +39,6 @@ select a.first_name, b.title
 from employees a join titles b on a.emp_no = b.emp_no
 where b.to_date = '9999-01-01';     -- row 선택 조건
 
-
 -- outer join
 -- insert into dept values(null, '총무');
 -- insert into dept values(null, '영업');
