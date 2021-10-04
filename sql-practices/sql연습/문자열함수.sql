@@ -15,7 +15,7 @@ select substring('Hello World', 3, 2);
 -- 예제) 1989년에 입사한 사원들의 이름, 입사일 출력
 select first_name, hire_date
 from employees
-where hire_date = substring(hire_date, 1, 4);
+where substring(hire_date, 1, 4) = '1989';
 
 -- lpad(오른쪽 정렬), rpad
 select lpad('1234', 10,'-');
