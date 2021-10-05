@@ -12,8 +12,7 @@ show profiles;
 -- 마지막으로 신입사원이 들어온 날은 언제 입니까? 다음 형식으로 출력해주세요.
 -- 예) 2014년 07월 10일
 select date_format(max(e.hire_date), '%Y년 %m월 %d일') as '마지막으로 신입사원이 들어온 날'
-from employees e join salaries s on e.emp_no = s.emp_no
-where s.to_date = '9999-01-01';
+from employees e;
 
 -- 문제3.
 -- 가장 오래 근속한 직원의 입사일은 언제인가요? 다음 형식으로 출력해주세요.
@@ -39,6 +38,12 @@ where to_date = '9999-01-01';
 -- 문제6.
 -- 최고 어린 사원의 나이와 최 연장자의 나이는?
 select round((to_days(now()) - to_days(max(birth_date))) /365) as '최고 어린사원 나이', 
-       round((to_days(now()) - to_days(min(birth_date))) /365)  as '최고 연장자 나이'
+       round((to_days(now()) - to_days(min(birth_date))) /365) as '최고 연장자 나이'
 from employees;
 
+select min(date_format(now(), '%Y') - date_format(birth_date, '%Y')) as '최연소 사원',
+	max(date_format(now(), '%Y') - date_format(birth_date, '%Y')) as '최연장 사원'
+from employees;
+
+
+select timestampdiff(year, max(birth_date), curdate())+1 as '최연소자', timestampdiff(year, min(birth_date), curdate())+1 as '최연장자' from employees;

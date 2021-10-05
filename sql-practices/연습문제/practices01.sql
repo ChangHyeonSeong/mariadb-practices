@@ -13,7 +13,7 @@ select distinct concat(first_name,' ',last_name) as '이름', gender as '성별'
  
 -- 문제3.
 -- 여직원과 남직원은 각 각 몇 명이나 있나요?
-select gender as '남여', sum(emp_no) as '총 인원 수'
+select gender as '남여', count(emp_no) as '총 인원 수'
 from employees
 group by gender;
 
