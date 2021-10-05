@@ -6,6 +6,7 @@ from salaries;
 select s.최고임금, s.최저임금, (s.최고임금 - s.최저임금) as '최고임금 – 최저임금'
 from (select max(salary) as '최고임금', min(salary) as '최저임금' from salaries) s;
 
+show profiles;
 
 -- 문제2.
 -- 마지막으로 신입사원이 들어온 날은 언제 입니까? 다음 형식으로 출력해주세요.
