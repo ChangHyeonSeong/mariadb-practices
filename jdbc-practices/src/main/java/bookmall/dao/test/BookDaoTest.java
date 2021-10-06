@@ -1,10 +1,10 @@
 package bookmall.dao.test;
 
-public class CategoryTest {
+public class BookDaoTest {
 
 	public static void main(String[] args) {
-		// insertTest();
-		// findAllTest();
+		// TODO Auto-generated method stub
+
 	}
 
 }
