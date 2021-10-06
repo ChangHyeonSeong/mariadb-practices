@@ -1,21 +1,50 @@
 -- 문제1.
 -- 현재 평균 연봉보다 많은 월급을 받는 직원은 몇 명이나 있습니까?
+                   
+select count(emp_no)
+from  salaries
+where to_date = '9999-01-01'
+  and salary > (select avg(salary)
+                    from salaries
+                   where to_date = '9999-01-01');
+                   
 select count(e.emp_no)
 from  employees e join salaries s on e.emp_no = s.emp_no
 where s.to_date = '9999-01-01'
   and s.salary > (select avg(salary)
                     from salaries
-                   where to_date = '9999-01-01');
+                   where to_date = '9999-01-01');                  
+                   
 -- 문제2. 
 -- 현재, 각 부서별로 최고의 급여를 받는 사원의 사번, 이름, 부서 연봉을 조회하세요. 단 조회결과는 연봉의 내림차순으로 정렬되어 나타나야 합니다. 
 
+-- from절
 select e.emp_no as '사번', e.first_name as '이름', ds.부서번호, ds.최고연봉 
-from employees e join (select de.emp_no as '사번', de.dept_no as '부서번호',max(s.salary) as '최고연봉'
+from employees e join dept_emp de on e.emp_no = de.emp_no 
+                 join salaries s on de.emp_no = s.emp_no
+				join (select de.dept_no as '부서번호',max(s.salary) as '최고연봉'
 						from salaries s join dept_emp de on s.emp_no = de.emp_no
-						where s.to_date = '9999-01-01'
-                          and de.to_date = '9999-01-01'
-						group by de.dept_no) ds on e.emp_no = ds.사번
+					   where s.to_date = '9999-01-01'
+						 and de.to_date = '9999-01-01'
+					group by de.dept_no) ds on de.dept_no = ds.부서번호
+where de.to_date = '9999-01-01'
+  and s.to_date = '9999-01-01'
+  and s.salary = ds.최고연봉
 order by ds.최고연봉 desc;
+
+-- where 절
+select e.emp_no as '사번', e.first_name as '이름', d.dept_name as '부서이름',  s.salary as '연봉' 
+from employees e join salaries s on e.emp_no = s.emp_no
+                 join dept_emp de on s.emp_no = de.emp_no
+                 join departments d on de.dept_no = d.dept_no
+where (de.dept_no, s.salary) in (select de.dept_no, max(s.salary)
+					               from salaries s join dept_emp de on s.emp_no = de.emp_no
+					              where s.to_date = '9999-01-01'
+					                and de.to_date = '9999-01-01'
+					           group by de.dept_no)
+order by s.salary desc;
+
+
 
 --  문제3.
 -- 현재, 자신의 부서 평균 급여보다 연봉(salary)이 많은 사원의 사번, 이름과 연봉을 조회하세요 
