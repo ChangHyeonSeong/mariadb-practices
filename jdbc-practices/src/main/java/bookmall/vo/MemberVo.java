@@ -9,7 +9,7 @@ public class MemberVo {
 
 	@Override
 	public String toString() {
-		return "MemberVo [name=" + name + ", phone=" + phone + ", email=" + email + "]";
+		return "회원 [이름 =" + name + ", 전화번호 =" + phone + ", email =" + email + "]";
 	}
 	public String getName() {
 		return name;

@@ -1,18 +1,31 @@
 package bookmall.vo;
 
-public class OrderVo {
-	private Long no;
+public class OrdersVo {
 	private String orderNo;
 	private String address;
     private String name;
-    private String phone;
-	private String email;
+    private String email;
+	private Long memberNo;
+	private Long price;
 	
-	public Long getNo() {
-		return no;
+	
+	public Long getPrice() {
+		return price;
 	}
-	public void setNo(Long no) {
-		this.no = no;
+	public void setPrice(Long price) {
+		this.price = price;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Long getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(Long memberNo) {
+		this.memberNo = memberNo;
 	}
 	public String getOrderNo() {
 		return orderNo;
@@ -32,23 +45,11 @@ public class OrderVo {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+
 	
 	@Override
 	public String toString() {
-		return "OrderVo [no=" + no + ", orderNo=" + orderNo + ", address=" + address + ", name=" + name + ", phone="
-				+ phone + ", email=" + email + "]";
+		return "주문 [ 주문번호 = " + orderNo + ", 배송지 = " + address + ", 회원이름 = " + name + ", email = " + email + ", 주문총액 = "+price +" ]";
 	}
 	
 	

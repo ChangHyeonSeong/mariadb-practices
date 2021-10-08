@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import bookmall.vo.CategoryVo;
+import bookmall.vo.OrderBookVo;
 
-public class CategoryDao {
-	public boolean insert(CategoryVo vo) {
+public class OrderBookDao {
+	public boolean insert(OrderBookVo vo) {
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -20,11 +20,14 @@ public class CategoryDao {
 			conn = getConnection();
 			
 			//3. SQL 준비
-			String sql = "insert into category values(null, ?)";
+			String sql = "insert into order_book values(null,?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
 			//4. 바인딩(binding)
-			pstmt.setString(1, vo.getName());
+			pstmt.setLong(1, vo.getAmount());
+			pstmt.setLong(2, vo.getBookNo());
+			pstmt.setLong(3, vo.getOrderNo());
+			
 			
 			//5. SQL 실행
 			int count = pstmt.executeUpdate();
@@ -49,8 +52,8 @@ public class CategoryDao {
 		return result;
 	}
 	
-	public List<CategoryVo> findAll() {
-		List<CategoryVo> result = new ArrayList<>();
+	public List<OrderBookVo> findAll() {
+		List<OrderBookVo> result = new ArrayList<>();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -61,7 +64,8 @@ public class CategoryDao {
 			
 			//3. SQL 준비
 			String sql = 
-				"select cate_name from category";
+				    " select ob.book_no, b.title, ob.amount"
+				  + "  from order_book ob join book b on ob.book_no = b.no";
 			pstmt = conn.prepareStatement(sql);
 			
 			//4. 바인딩(binding)
@@ -70,10 +74,14 @@ public class CategoryDao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				String name = rs.getString(1);
+				Long bookNo = rs.getLong(1);
+				String title = rs.getString(2);
+				Long amount = rs.getLong(3);
 				
-				CategoryVo vo = new CategoryVo();
-				vo.setName(name);
+				OrderBookVo vo = new OrderBookVo();
+				vo.setBookNo(bookNo);
+				vo.setTitle(title);
+				vo.setAmount(amount);
 				
 				result.add(vo);
 			}
@@ -93,14 +101,12 @@ public class CategoryDao {
 					conn.close();
 				}
 			} catch (SQLException e) {
-				System.out.println("error:" + e);
+				System.out.println("finally error:" + e);
 			}
 		}
 		
 		return result;
 	}
-
-	
 	
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
@@ -117,5 +123,4 @@ public class CategoryDao {
 
 		return conn;
 	}
-
 }

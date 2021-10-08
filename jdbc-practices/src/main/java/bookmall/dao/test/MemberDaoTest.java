@@ -10,7 +10,7 @@ import bookmall.vo.MemberVo;
 public class MemberDaoTest {
 
 	public static void main(String[] args) {
-		//insertTest();
+	     //insertTest();
 		findAllTest();
 	}
 	

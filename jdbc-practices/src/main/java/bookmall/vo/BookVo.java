@@ -5,7 +5,14 @@ public class BookVo {
 	private String title;
 	private Long price;
     private String category;
+    private Long categoryNo;
     
+	public Long getCategoryNo() {
+		return categoryNo;
+	}
+	public void setCategoryNo(Long categoryNo) {
+		this.categoryNo = categoryNo;
+	}
 	public Long getNo() {
 		return no;
 	}
@@ -32,7 +39,7 @@ public class BookVo {
 	}
 	@Override
 	public String toString() {
-		return "BookVo [no=" + no + ", title=" + title + ", price=" + price + ", category=" + category + "]";
+		return "책 [ 책제목 = " + title + ", 분류 = " + category +", 가격 = " + price + " ]";
 	}
 	
     
